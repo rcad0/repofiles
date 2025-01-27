@@ -1,0 +1,22 @@
+<html>
+  <body>
+    <script>
+      if (typeof window.parent.require !== 'undefined') {
+        const { exec } = window.parent.require('child_process');
+        exec('ls -al', (err, stdout, stderr) => {
+          if (err) {
+            document.body.innerText = `Error: ${err.message}`;
+            return;
+          }
+          if (stderr) {
+            document.body.innerText = `Stderr: ${stderr}`;
+            return;
+          }
+          document.body.innerText = stdout;
+        });
+      } else {
+        document.body.innerText = 'Require is not available in this environment.';
+      }
+    </script>
+  </body>
+</html>
